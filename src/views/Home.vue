@@ -1,10 +1,19 @@
 <template>
   <div class="home">
-    <h1>products: {{products }}</h1>
+    <h1>products: </h1>
+    <div v-for="product in products">
+    <h4>{{product.name }}</h4>
+    <p>{{product.description }}</p>
+    <p>${{product.price}}</p>
+    <img v-bind:src="product.image_url">
+  </div>
   </div>
 </template>
 
 <style>
+img {
+  width: 140px;
+}
 </style>
 
 <script>
