@@ -10,18 +10,25 @@
 
 
     <div v-for="product in products">
-    <h4>{{product.name }}</h4>
-    <p>{{product.description }}</p>
-    <p>${{product.price}}</p>
-    <img v-bind:src="product.image_url">
-  </div>
+      <h4>{{product.name }}</h4>
+      <p>{{product.description }}</p>
+      <p>${{product.price}}</p>
+      <img v-bind:src="product.image_url">
+
+      <button v-on:click="currentProduct=product">Show more info</button>
+      <div v-if="product === currentProduct">
+       <p>Product ID: {{product.id}}</p>
+       <p>Tax: ${{product.tax}}</p>
+       <p>Total Price: ${{product.total}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <style>
-img {
-  width: 140px;
-}
+  img {
+    width: 140px;
+  }
 </style>
 
 <script>
@@ -35,7 +42,8 @@ export default {
       newProductPrice: "",
       newProductDescription: "",
       newProductTitle: "",
-      newProductImageUrl: ""
+      newProductImageUrl: "",
+      currentProduct: {}
     };
   },
   created: function() {
@@ -47,7 +55,7 @@ export default {
     axios.get("/api/products").then(response => {
 
       this.products = response.data;
-      console.log(response.data);
+      // console.log(response.data);
     });
   },
   methods: {
@@ -65,7 +73,7 @@ export default {
       }; //sent as body/form params 
 
       axios.post("/api/products", params).then(response=>{
-        console.log(response);
+        // console.log(response);
         this.products.push(response.data);
       });
     }
