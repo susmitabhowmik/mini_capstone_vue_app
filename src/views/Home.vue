@@ -17,9 +17,13 @@
 
       <button v-on:click="toggleInfo(product)">Show more info</button>
       <div v-if="product === currentProduct">
-       <p>Product ID: {{product.id}}</p>
-       <p>Tax: ${{product.tax}}</p>
-       <p>Total Price: ${{product.total}}</p>
+       <!-- When user modifies these it will update the lines above on the index page -->
+       <p>Name:<input type="text" v-model="product.name"></p>
+       <p>Description:<input type="text" v-model="product.description"></p>
+       <p>Price:<input type="text" v-model="product.price"></p>
+       <p>Image Url:<input type="text" v-model="product.image_url"></p>
+       <button v-on:click="updateProduct(product)">Update the product</button>
+
       </div>
     </div>
   </div>
@@ -86,6 +90,17 @@ export default {
         this.currentProduct = theProduct;
       }
       console.log('toggling info...');
+    },
+    updateProduct: function(theProduct) {
+      console.log("updating the product...");
+      var params = {
+        name: theProduct.name,
+        description: theProduct.description,
+        price: theProduct.price,
+        image_url: theProduct.image_url
+      };
+      axios.patch("/api/products/" + theProduct.id, params).then(response=>{
+      });
     }
   }
 };
