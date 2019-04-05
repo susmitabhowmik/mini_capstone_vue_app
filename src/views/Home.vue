@@ -15,7 +15,7 @@
       <p>${{product.price}}</p>
       <img v-bind:src="product.image_url">
 
-      <button v-on:click="currentProduct=product">Show more info</button>
+      <button v-on:click="toggleInfo(product)">Show more info</button>
       <div v-if="product === currentProduct">
        <p>Product ID: {{product.id}}</p>
        <p>Tax: ${{product.tax}}</p>
@@ -27,7 +27,7 @@
 
 <style>
   img {
-    width: 140px;
+    width: 200px;
   }
 </style>
 
@@ -76,6 +76,16 @@ export default {
         // console.log(response);
         this.products.push(response.data);
       });
+    },
+    toggleInfo: function(theProduct) {
+      if (this.currentProduct === theProduct) {
+        //already looking at the info
+        this.currentProduct = {};
+      } else {
+        //we can't see the info
+        this.currentProduct = theProduct;
+      }
+      console.log('toggling info...');
     }
   }
 };
