@@ -4,7 +4,7 @@
     <p>Name:<input type="text" v-model="newProductTitle">
     <p>Description:<input type="text" v-model="newProductDescription">
     <p>Price:<input type="text" v-model="newProductPrice">
-     <p>Image Url:<input type="text" v-model="newProductImageUrl">
+    <p>Image Url:<input type="text" v-model="newProductImageUrl">
 
     <button v-on:click="addNewProduct()">Add a new product</button>
 
@@ -23,8 +23,8 @@
        <p>Price:<input type="text" v-model="product.price"></p>
        <p>Image Url:<input type="text" v-model="product.image_url"></p>
        <button v-on:click="updateProduct(product)">Update the product</button>
-
       </div>
+      <button v-on:click="deleteProduct(product)">Remove this product</button>
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@
 <style>
   img {
     width: 200px;
+    length:200px;
   }
 </style>
 
@@ -100,6 +101,17 @@ export default {
         image_url: theProduct.image_url
       };
       axios.patch("/api/products/" + theProduct.id, params).then(response=>{
+      });
+    },
+    deleteProduct: function(theProduct) {
+      // make an HTTP request using axios to the destroy part of the API (delete from database)
+      axios.delete("/api/products/" + theProduct.id).then(response => {
+        console.log(response);
+        // delete the product from the products array
+        //find the index of the recipe in the array
+        var index = this.products.indexOf(theProduct);
+        //remove the item based on that index
+        this.products.splice(index, 1);
       });
     }
   }
