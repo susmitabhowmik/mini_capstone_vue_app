@@ -4,7 +4,8 @@
       <h4>{{product.name }}</h4>
       <p>{{product.description }}</p>
       <p>${{product.price}}</p>
-      <img v-bind:src="product.image_url">  
+      <p><img v-bind:src="product.image_url"></p>
+      <p><router-link v-bind:to=" '/products/' + product.id + '/edit'"> Edit this product </router-link></p>
     </div>
 </template>
 
