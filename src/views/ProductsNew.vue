@@ -1,12 +1,19 @@
 <template>
   <div class="root">
     Welcome to the /products/new page
+    <div v-for="error in errors">
+        {{ error }}
+    </div>
+
+    <form v-on:submit.prevent="addNewProduct()">
     <p>Name:<input type="text" v-model="newProductTitle"></p>
     <p>Description:<input type="text" v-model="newProductDescription"></p>
     <p>Price:<input type="text" v-model="newProductPrice"></p>
     <p>Image Url:<input type="text" v-model="newProductImageUrl"></p>
-
+<!--     <input type="submit" value="Add a new product">
+ -->
     <button v-on:click="addNewProduct()">Add a new product</button>
+  </form>
   </div>
 </template>
 
@@ -21,6 +28,7 @@ export default {
       newProductDescription: "",
       newProductTitle: "",
       newProductImageUrl: "",
+      errors: []
     };
   },
   created: function() {},
@@ -37,8 +45,14 @@ export default {
         image_url: this.newProductImageUrl
       }; //sent as body/form params 
       axios.post("/api/products", params).then(response=>{
-        // console.log(response);
-        this.products.push(response.data);
+        console.log('Things are going well');
+        console.log(response);
+        this.$router.push("/");
+        // this.products.push(response.data);
+      }).catch(error => {
+        console.log('Things are not going well');
+        console.log(error.response.data.errors);
+        this.errors = error.response.data.errors;
       });
     }
   },
