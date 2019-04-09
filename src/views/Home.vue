@@ -1,12 +1,7 @@
 <template>
   <div class="home">
     <h1> {{message}} </h1>
-    <p>Name:<input type="text" v-model="newProductTitle">
-    <p>Description:<input type="text" v-model="newProductDescription">
-    <p>Price:<input type="text" v-model="newProductPrice">
-    <p>Image Url:<input type="text" v-model="newProductImageUrl">
-
-    <button v-on:click="addNewProduct()">Add a new product</button>
+   
 
 
     <div v-for="product in products">
