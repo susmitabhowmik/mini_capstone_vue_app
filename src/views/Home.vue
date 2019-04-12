@@ -3,8 +3,11 @@
     <h1> {{message}} </h1>
    
 
+    <input type="text" v-model="priceFilter">
 
-    <div v-for="product in products">
+<!--     <div v-for="product in products">
+ -->     
+      <div v-for="product in filterBy(products, priceFilter, 'price')">
       <h4>{{product.name }}</h4>
       <p>{{product.description }}</p>
       <p>${{product.price}}</p>
@@ -33,12 +36,15 @@
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       message: "Products",
       products: [],
+      priceFilter: "",
       newProductPrice: "",
       newProductDescription: "",
       newProductTitle: "",
