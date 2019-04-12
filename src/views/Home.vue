@@ -8,9 +8,14 @@
         <option v-for="product in products"> {{ product.price}}</option>
       </datalist>
 
+    <button v-on:click="setSortAttribute('name')">Sort by name</button>
+    <button v-on:click="setSortAttribute('price')">Sort by price</button>
+
 <!--     <div v-for="product in products">
  -->     
-      <div v-for="product in filterBy(products, priceFilter, 'price')">
+<!--       <div v-for="product in filterBy(products, priceFilter, 'price')">
+ -->      <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+    <div v-for="product in orderBy(products,sortAttribute,sortAsc)" v-bind:key="product.id">    
       <h4>{{product.name }}</h4>
       <p>{{product.description }}</p>
       <p>${{product.price}}</p>
@@ -27,6 +32,7 @@
       </div>
       <button v-on:click="deleteProduct(product)">Remove this product</button>
     </div>
+  </transition-group>
   </div>
 </template>
 
@@ -48,6 +54,8 @@ export default {
       message: "Products",
       products: [],
       priceFilter: "",
+      sortAsc: 1,
+      sortAttribute: "",
       newProductPrice: "",
       newProductDescription: "",
       newProductTitle: "",
@@ -117,6 +125,15 @@ export default {
         //remove the item based on that index
         this.products.splice(index, 1);
       });
+    },
+    setSortAttribute: function(attribute) {
+      console.log(attribute);
+      this.sortAttribute = attribute;
+      if (this.sortAsc === 1) {
+        this.sortAsc = -1;
+      } else {
+        this.sortAsc = 1;
+      }
     }
   }
 };
