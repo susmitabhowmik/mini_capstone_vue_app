@@ -3,7 +3,10 @@
     <h1> {{message}} </h1>
    
 
-    <input type="text" v-model="priceFilter">
+    <input type="text" v-model="priceFilter" list="price">
+      <datalist id="price">
+        <option v-for="product in products"> {{ product.price}}</option>
+      </datalist>
 
 <!--     <div v-for="product in products">
  -->     
