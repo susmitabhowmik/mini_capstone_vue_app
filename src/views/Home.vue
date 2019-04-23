@@ -120,7 +120,7 @@ export default {
       axios.delete("/api/products/" + theProduct.id).then(response => {
         console.log(response);
         // delete the product from the products array
-        //find the index of the recipe in the array
+        //find the index of the product in the array
         var index = this.products.indexOf(theProduct);
         //remove the item based on that index
         this.products.splice(index, 1);
