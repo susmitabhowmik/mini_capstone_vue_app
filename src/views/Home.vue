@@ -9,7 +9,7 @@
       </datalist>
 
     <button v-on:click="setSortAttribute('name')">Sort by name</button>
-    <button v-on:click="setSortAttribute('price')">Sort by price</button>
+    <button v-on:click="setSortAttribute('price')" style="margin-bottom: 0.5%">Sort by price</button>
 
 <!--     <div v-for="product in products">
  -->     
@@ -40,6 +40,10 @@
   img {
     width: 200px;
     length:200px;
+  }
+
+  button {
+    margin: 0% 0.5%;
   }
 </style>
 

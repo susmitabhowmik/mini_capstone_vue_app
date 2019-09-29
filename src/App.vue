@@ -46,5 +46,10 @@
 </template>
 
 <style>
-
+  #app {
+    text-align: center;
+  }
+  img {
+    padding: 1%;
+  }
 </style>
